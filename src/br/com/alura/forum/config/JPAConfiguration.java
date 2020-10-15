@@ -5,8 +5,8 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -17,10 +17,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class JPAConfiguration {
 
+	@Autowired
+	private DataSource dataSource;
+
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-		em.setDataSource(dataSource());
+		em.setDataSource(dataSource);
 		em.setPackagesToScan(new String[] { "br.com.alura.forum.model" });
 
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
@@ -30,27 +33,6 @@ public class JPAConfiguration {
 		return em;
 	}
 
-	/* DATASOURCE DE DESENVOLVIMENTO */ 
-//	@Bean
-//	public DataSource dataSource() {
-//		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-//		dataSource.setUrl("jdbc:mysql://localhost:3306/alura_forum?useSSL=false");
-//		dataSource.setUsername("root");
-//		dataSource.setPassword("");
-//		return dataSource;
-//	}
-
-	@Bean
-	public DataSource dataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://192.168.0.8:3306/alura_forum?useSSL=false");
-		dataSource.setUsername("alura");
-		dataSource.setPassword("qwerty123");
-		return dataSource;
-	}
-	
 	@Bean
 	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
 		JpaTransactionManager transactionManager = new JpaTransactionManager();
