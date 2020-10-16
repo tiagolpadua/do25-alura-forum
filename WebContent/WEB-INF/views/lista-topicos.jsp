@@ -13,7 +13,7 @@
 			<section class="banner">
 				<div class="container">
 					<h1 class="banner-title">
-						<a href="#" class="banner-title-link">Fórum </a>
+						<a href="#" class="banner-title-link">Fórum Alterado!</a>
 					</h1>
 				</div>
 			</section>
