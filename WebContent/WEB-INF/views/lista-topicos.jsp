@@ -9,6 +9,7 @@
 
 <custom:template>
 	<jsp:body>
+		<h1>Mudança!</h1>
 		<section class="allTopics">
 			<section class="banner">
 				<div class="container">
