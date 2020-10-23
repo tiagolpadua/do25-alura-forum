@@ -14,7 +14,7 @@ public class DataSourceConfiguration {
 	public DataSource desenvolvimento() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/alura_forum?useSSL=false");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/alura_forum?useSSL=false&useTimezone=true&serverTimezone=UTC");
 		dataSource.setUsername("root");
 		dataSource.setPassword("");
 		return dataSource;
