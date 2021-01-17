@@ -5,6 +5,8 @@ Vagrant.configure("2") do |config|
 
     db.vm.network "private_network", ip: "192.168.56.110"
     db.vm.network "forwarded_port", guest: 3306, host: 3307
+#    db.vm.synced_folder "C://alura-database-data", "/var/lib/mysql"
+    db.vm.synced_folder "alura-database-data", "/var/lib/mysql"
 
     db.vm.provision "shell", path: "vagrant/database/install.sh"
     db.vm.provision "file", source: "vagrant/database/mysqld.cnf", destination: "/tmp/mysqld.cnf"
@@ -25,7 +27,7 @@ Vagrant.configure("2") do |config|
     web.vm.provision "file", source: "vagrant/web/glowroot.zip", destination: "/tmp/glowroot.zip"
     web.vm.provision "file", source: "vagrant/web/admin.json", destination: "/tmp/admin.json"
     web.vm.provision "shell", path: "vagrant/web/post-install.sh"
-    web.vm.provision "file", source: "target/alura-forum-0.0.1-SNAPSHOT.war", destination: "/tmp/alura-forum.war", run: "always"
+    web.vm.provision "file", source: "target/*.war", destination: "/tmp/alura-forum.war", run: "always"
     web.vm.provision "shell", path: "vagrant/web/deploy.sh", run: "always"
   end
 
